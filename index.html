@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>100 سؤال | الاضطرابات المعرفية - الفصول الخمسة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+            font-family: 'Cairo', sans-serif;
+            min-height: 100vh;
+            padding: 1rem;
+            position: relative;
+            color: #e2e8f0;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at 30% 40%, rgba(139, 92, 246, 0.08), rgba(59, 130, 246, 0.05));
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(2px 2px at 15% 40%, #8b5cf6, rgba(0,0,0,0)), radial-gradient(1px 1px at 75% 85%, #3b82f6, rgba(0,0,0,0));
+            background-size: 200px 220px, 300px 280px;
+            background-repeat: repeat;
+            opacity: 0.12;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(139, 92, 246, 0.08));
+            backdrop-filter: blur(16px);
+            border-radius: 50px;
+            padding: 1rem;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #60a5fa, #c084fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hero p {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin-top: 5px;
+        }
+
+        .total-badge {
+            background: linear-gradient(95deg, #3b82f6, #8b5cf6);
+            padding: 0.2rem 1rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            display: inline-block;
+            margin-top: 6px;
+        }
+
+        .tab-nav {
+            display: flex;
+            justify-content: center;
+            gap: 0.4rem;
+            margin-bottom: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: rgba(30, 27, 75, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 40px;
+            padding: 0.4rem 0.9rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            color: #cbd5e1;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(95deg, #3b82f6, #8b5cf6);
+            color: white;
+            border-color: transparent;
+        }
+
+        .tab-btn:hover:not(.active) {
+            background: rgba(59, 130, 246, 0.4);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeUp 0.3s ease;
+        }
+
+        .tab-content.active-tab {
+            display: block;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .questions-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+        }
+
+        .question-card {
+            background: linear-gradient(145deg, rgba(30, 27, 75, 0.7), rgba(15, 23, 42, 0.8));
+            backdrop-filter: blur(12px);
+            border-radius: 1.3rem;
+            padding: 0.9rem 1.2rem;
+            border-left: 3px solid #3b82f6;
+        }
+
+        .q-header {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            margin-bottom: 0.6rem;
+            flex-wrap: wrap;
+        }
+
+        .q-num {
+            background: linear-gradient(95deg, #3b82f6, #8b5cf6);
+            padding: 0.1rem 0.6rem;
+            border-radius: 30px;
+            font-size: 0.65rem;
+            font-weight: 800;
+        }
+
+        .q-text {
+            font-size: 0.9rem;
+            font-weight: 700;
+            line-height: 1.4;
+            flex: 1;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+            margin: 0.5rem 0;
+        }
+
+        .opt {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(15, 23, 42, 0.6);
+            padding: 0.35rem 0.8rem;
+            border-radius: 40px;
+            cursor: pointer;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .opt:hover {
+            background: rgba(59, 130, 246, 0.25);
+            transform: translateX(4px);
+        }
+
+        input[type="radio"] {
+            width: 15px;
+            height: 15px;
+            accent-color: #8b5cf6;
+            cursor: pointer;
+        }
+
+        label {
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .check-btn {
+            background: linear-gradient(95deg, #3b82f6, #8b5cf6);
+            border: none;
+            padding: 0.25rem 1rem;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.7rem;
+            color: white;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 0.3rem;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .check-btn:disabled {
+            opacity: 0.5;
+            cursor: default;
+        }
+
+        .feedback {
+            margin-top: 6px;
+            padding: 3px 10px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.65rem;
+            display: inline-block;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .feedback.correct {
+            background: #065f46;
+            color: #d1fae5;
+            border-right: 3px solid #34d399;
+        }
+
+        .feedback.wrong {
+            background: #991b1b;
+            color: #fee2e2;
+            border-right: 3px solid #f87171;
+        }
+
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.8rem;
+            background: rgba(30, 27, 75, 0.5);
+            border-radius: 40px;
+            padding: 0.2rem 1rem;
+        }
+
+        .progress-text {
+            font-size: 0.65rem;
+        }
+
+        .reset-btn {
+            background: rgba(59, 130, 246, 0.3);
+            border: none;
+            padding: 0.15rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.65rem;
+            cursor: pointer;
+            color: #cbd5e1;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding: 0.6rem;
+            font-size: 0.6rem;
+            color: #64748b;
+            border-top: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        @media (max-width: 650px) {
+            .tab-btn { padding: 0.3rem 0.6rem; font-size: 0.65rem; }
+            .q-text { font-size: 0.8rem; }
+            label { font-size: 0.7rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="particles"></div>
+<div class="container">
+    <div class="hero">
+        <h1><i class="fas fa-crown"></i> 100 سؤال – الاضطرابات المعرفية <i class="fas fa-brain"></i></h1>
+        <p>الفصل الأول · الثاني · الثالث · الرابع · الخامس | مستوى صعب | إجابات ملغبطة</p>
+        <div class="total-badge"><i class="fas fa-star"></i> 20 سؤال لكل فصل – بدون الأجزاء المحذوفة <i class="fas fa-star"></i></div>
+    </div>
+
+    <div class="tab-nav">
+        <button class="tab-btn active" data-tab="tab1"><i class="fas fa-book"></i> الفصل الأول</button>
+        <button class="tab-btn" data-tab="tab2"><i class="fas fa-diagnoses"></i> الفصل الثاني</button>
+        <button class="tab-btn" data-tab="tab3"><i class="fas fa-eye"></i> الفصل الثالث</button>
+        <button class="tab-btn" data-tab="tab4"><i class="fas fa-chart-line"></i> الفصل الرابع</button>
+        <button class="tab-btn" data-tab="tab5"><i class="fas fa-gem"></i> الفصل الخامس</button>
+    </div>
+
+    <div id="tab1" class="tab-content active-tab"><div class="questions-flow" id="chap1Flow"></div><div class="progress-bar"><span class="progress-text" id="chap1Progress">📊 0/20</span><button class="reset-btn" data-chap="chap1">↺ إعادة</button></div></div>
+    <div id="tab2" class="tab-content"><div class="questions-flow" id="chap2Flow"></div><div class="progress-bar"><span class="progress-text" id="chap2Progress">📊 0/20</span><button class="reset-btn" data-chap="chap2">↺ إعادة</button></div></div>
+    <div id="tab3" class="tab-content"><div class="questions-flow" id="chap3Flow"></div><div class="progress-bar"><span class="progress-text" id="chap3Progress">📊 0/20</span><button class="reset-btn" data-chap="chap3">↺ إعادة</button></div></div>
+    <div id="tab4" class="tab-content"><div class="questions-flow" id="chap4Flow"></div><div class="progress-bar"><span class="progress-text" id="chap4Progress">📊 0/20</span><button class="reset-btn" data-chap="chap4">↺ إعادة</button></div></div>
+    <div id="tab5" class="tab-content"><div class="questions-flow" id="chap5Flow"></div><div class="progress-bar"><span class="progress-text" id="chap5Progress">📊 0/20</span><button class="reset-btn" data-chap="chap5">↺ إعادة</button></div></div>
+
+    <footer>⚡ جميع الأسئلة من صميم المحتوى – الأجزاء المحذوفة مستبعدة ⚡</footer>
+</div>
+
+<script>
+    // ===================== أسئلة الفصل الأول (20 سؤال) =====================
+    const chap1 = [
+        { text: "أي من الآتي يمثل جوهر العمليات المعرفية التي تميز الإنسان عن غيره من الكائنات؟", options: ["الاستجابات الانعكاسية للمثيرات البيئية", "تحويل المدخل الحسي وتخزينه واستعادته", "قياس السلوك الظاهري القابل للملاحظة", "تحليل الصراعات اللاواعية المكبوتة"], correct: 1 },
+        { text: "كيف يمكن تمييز الاتجاه المعرفي عن الاتجاه السلوكي في تفسير السلوك الإنساني؟", options: ["السلوكي يهتم بالعمليات العقلية الداخلية", "المعرفي يرى أن السلوك مجرد ردود فعل آلية", "المعرفي يؤكد وجود عمليات وسيطة بين المثير والاستجابة", "السلوكي يرفض دور الخبرات السابقة تماماً"], correct: 2 },
+        { text: "أي من العلماء التاليين عرّف علم النفس المعرفي بأنه 'فهم المعرفة الإنسانية وعلاقتها بسلوك الفرد'؟", options: ["ألريك نيسر", "بيست", "هنت", "ستيرنبرغ"], correct: 1 },
+        { text: "ما المبرر المنهجي الذي دفع علماء النفس المعرفي لرفض الاعتماد على منهج الاستبطان؟", options: ["صعوبة تدريب الأفراد على وصف محتويات وعيهم", "عدم استيفائه معايير البحث العلمي من موضوعية وثبات", "حاجته إلى أجهزة معملية متطورة وغير متوفرة", "عدم قدرته على قياس زمن الرجع بدقة"], correct: 1 },
+        { text: "أي من الإجراءات التالية اتبعها إبنجهاوس للتحكم في تأثير الخبرات السابقة على التعلم؟", options: ["استخدام كلمات من لغة أجنبية غير معروفة", "استخدام مقاطع عديمة المعنى (ثلاثة أحرف ساكن ومتحرك)", "تكرار عرض الكلمات عدة مرات قبل بدء التجربة", "تدريب المفحوصين على الاستبطان قبل بدء التجربة"], correct: 1 },
+        { text: "في منحنى إبنجهاوس للنسيان، متى يحدث أكبر قدر من فقدان المعلومات المخزنة؟", options: ["بعد مرور أسبوع كامل من التعلم", "بعد مرور شهر من تاريخ التعلم", "في الساعة الأولى مباشرة بعد التعلم", "بعد مرور 24 ساعة فقط من التعلم"], correct: 2 },
+        { text: "ما المقصود بـ'الكف الرجعي' كأحد الآليات المفسرة للنسيان؟", options: ["تأثير تعلم الفعاليات السابقة على تذكر الفعاليات اللاحقة", "تأثير تعلم الفعاليات اللاحقة على تذكر الفعاليات السابقة", "اضمحلال وتلاشي أثر الذاكرة مع مرور الزمن", "كبت الخبرات المؤلمة في اللاشعور"], correct: 1 },
+        { text: "أي من المجالات التالية لا يعتبر من المكونات الأساسية لعلم النفس المعرفي؟", options: ["الإدراك والانتباه والذاكرة", "حل المشكلات والذكاء الإنساني", "التحليل النفسي ودراسة الغرائز", "اللغة والمفاهيم والتمثيل المعرفي"], correct: 2 },
+        { text: "ما الذي يعنيه 'تمثيل المعرفة' في إطار النظام المعرفي للإنسان؟", options: ["التسجيل الحسي المباشر للمثيرات", "تحويل المثيرات والخبرات إلى معاني وأفكار قابلة للتخزين", "الاستجابة التلقائية للمنبهات دون معالجة", "الاحتفاظ المؤقت بالمعلومات أثناء معالجتها فقط"], correct: 1 },
+        { text: "أي من الأمثلة التالية يمثل حدوث عمليات معرفية في غياب المثيرات المرتبطة بها؟", options: ["الشعور بالألم عند لمس سطح ساخن", "الرمش اللاإرادي عند اقتراب جسم من العين", "تكوين صورة ذهنية عن مكان لم تزره من قبل", "سيلان اللعاب تلقائياً عند رؤية الطعام"], correct: 2 },
+        { text: "في أبحاث علم النفس المعرفي، ماذا يقصد بمصطلح 'زمن الرجع'؟", options: ["الفترة بين التعلم واختبار الاستدعاء", "الوقت بين ظهور المثير واستجابة الفرد له", "مدة بقاء المعلومة في الذاكرة القصيرة", "الوقت اللازم لحفظ قائمة من الكلمات"], correct: 1 },
+        { text: "أي من الافتراضات التالية يعتبر ركيزة أساسية للاتجاه المعرفي في دراسة السلوك؟", options: ["السلوك الإنساني مجرد ردود فعل آلية لمثيرات", "العمليات العقلية الداخلية موجودة ومنظمة ويمكن دراستها", "الاستبطان هو الأسلوب الوحيد الموثوق لدراسة العقل", "العوامل الوراثية وحدها هي المسؤولة عن السلوك"], correct: 1 },
+        { text: "ما الذي توصل إليه إبنجهاوس من خلال دراسة علاقة طول القائمة بعدد التكرارات؟", options: ["مضاعفة طول القائمة يتطلب نفس عدد التكرارات", "نسبة الزيادة في التكرارات تختلف عن نسبة الزيادة في طول القائمة", "طول القائمة ليس له أي تأثير على عدد التكرارات", "العلاقة بين طول القائمة وعدد التكرارات علاقة عكسية"], correct: 1 },
+        { text: "أي من الخيارات التالية يعبر عن هدف 'الضبط' في علم النفس المعرفي؟", options: ["تفسير أسباب محدودية الذاكرة قصيرة المدى", "التنبؤ بقدرة الفرد على التذكر بعد التعرض للضوضاء", "تعليم الطلبة استراتيجيات معرفية تحسن التذكر", "وصف ظاهرة النسيان كما تحدث في المواقف الطبيعية"], correct: 2 },
+        { text: "أي من العبارات تصف دور الذاكرة طويلة المدى في معالجة المعلومات؟", options: ["تخزن المعلومات لفترة وجيزة لا تتجاوز بضع ثوانٍ", "مسؤولة فقط عن المعالجة وليست مسؤولة عن التخزين", "يتم فيها إعادة تنظيم المعلومات وتمثيلها للتخزين الدائم", "تعتمد كلياً على التكرار المستمر للحفاظ على المعلومات"], correct: 2 },
+        { text: "كيف يختلف الإنسان في الاتجاه المعرفي عنه في المدرسة السلوكية؟", options: ["سلبي في المعرفي ونشيط في السلوكي", "نشيط ومبادر في المعرفي وسلبي في السلوكي", "نشيط في كلا الاتجاهين", "سلبي في كلا الاتجاهين"], correct: 1 },
+        { text: "أي من العبارات يعتبر معياراً لتحقيق الصدق البيئي في أبحاث علم النفس المعرفي؟", options: ["استخدام عينات عشوائية كبيرة الحجم", "أن تمثل الأبحاث طريقة التفكير في مواقف الحياة الواقعية", "ضبط جميع المتغيرات الدخيلة في المختبر", "استخدام أحدث الأجهزة المعملية المتطورة"], correct: 1 },
+        { text: "ما الذي تعنيه 'البنية المعرفية' في سياق النمو المعرفي؟", options: ["مجموع الاستجابات الشرطية المكتسبة من البيئة", "خلاصة خبرات الفرد من تفاعل العوامل البيئية والوراثية", "العمليات الحسية الأولية قبل الوعي بالمثيرات", "مركز الكلام واللغة في الفص الصدغي الأيسر"], correct: 1 },
+        { text: "أي من مكونات علم النفس المعرفي يعني 'برامج تحاكي طريقة عمل العقل الإنساني'؟", options: ["الذكاء الاصطناعي", "النمو المعرفي", "علم الأعصاب المعرفي", "التعرف على النمط"], correct: 0 },
+        { text: "ما المقصود بـ'نظرية الاضمحلال' في تفسير النسيان؟", options: ["تداخل المعلومات السابقة واللاحقة", "المعلومات تبدأ بالتعفن والتلاشي مع الزمن وعدم الاستخدام", "كبت الخبرات المؤلمة في اللاشعور", "منع تمثيل البروتين يمنع تثبيت الخبرات"], correct: 1 }
+    ];
+
+    // ===================== أسئلة الفصل الثاني (20 سؤال) =====================
+    const chap2 = [
+        { text: "من هو العالم الذي يعتبر أول من طرح مفهوم الاضطرابات المعرفية في مناقشته للاكتئاب؟", options: ["جان بياجيه", "آرون بيك", "سيجموند فرويد", "كارل روجرز"], correct: 1 },
+        { text: "كم عدد مجالات الوظائف العقلية التي يحددها الدليل التشخيصي DSM-5؟", options: ["أربعة مجالات", "خمسة مجالات", "ستة مجالات", "سبعة مجالات"], correct: 2 },
+        { text: "كيف تعرف 'أوزين وزملاؤه' (2016) الاضطرابات المعرفية؟", options: ["أخطاء في التفكير تؤدي لنتائج سلبية", "أفكار ومعتقدات سلبية تؤثر على إدراك الواقع", "معالجة غير واعية للمدخلات الحسية", "أنماط معالجة منهجية خاطئة"], correct: 1 },
+        { text: "أي من الآتي يمثل 'اضطراب الإدراك السمعي والبصري'؟", options: ["ضعف القدرة على التركيز وسهولة التشتت", "صعوبة تمييز الأصوات المختلفة وأشكال الحروف المتشابهة", "عدم استدعاء مثيرات سبق تقديمها", "مشكلات في الحكم والمقارنة"], correct: 1 },
+        { text: "أي من الخيارات يندرج تحت 'اضطرابات التفكير'؟", options: ["صعوبة تمييز الأصوات المختلفة", "مشكلات في الحكم والمقارنة والاستدلال", "عدم استدعاء مثيرات سمعية سبق تقديمها", "ضعف التناسق للمهارات الحركية"], correct: 1 },
+        { text: "وفقاً لفلافيل، أي خصائص البنية المعرفية تتعلق بوعي الفرد بقدراته الذاتية؟", options: ["خصائص المهمة", "خصائص الفرد", "خصائص الاستراتيجية", "خصائص البيئة"], correct: 1 },
+        { text: "في نموذج بياجيه، ماذا تعني عملية 'الموائمة'؟", options: ["استيعاب المعلومات الجديدة دون تغيير", "تعديل البنية المعرفية لتتلاءم مع الخبرات الجديدة", "فقدان المعلومات القديمة", "زيادة سرعة معالجة المعلومات"], correct: 1 },
+        { text: "كيف عرّف 'مولينز' (2019) الاضطراب المعرفي؟", options: ["أفكار تؤدي لرؤية غير دقيقة للواقع", "أخطاء في التفكير تؤدي لمشاعر القلق واليأس", "أنماط معالجة خاطئة تنتج عاطفة مضطربة", "أفكار ومعتقدات سلبية تؤثر على الإدراك"], correct: 1 },
+        { text: "أي من العوامل يعتبر من الأسباب المتعلقة بالدماغ في اضطرابات الانتباه؟", options: ["تناول الأطعمة بالصبغات", "اختلال التوازن الكيميائي للناقلات العصبية", "العلاقة المتوترة بين الطفل ووالديه", "قلة عدد ساعات النوم"], correct: 1 },
+        { text: "كيف يمكن تمييز 'اضطراب الذاكرة السمعية البصرية' عن غيره؟", options: ["قدرة على تمييز الأصوات فقط", "ضعف استدعاء مثيرات صوتية أو بصرية سبق تقديمها", "مشكلات في الحكم والمقارنة", "صعوبة في تمييز أشكال الحروف"], correct: 1 },
+        { text: "أي من الآتي يعتبر من 'الاضطرابات الحركية'؟", options: ["ضعف تمييز الأصوات", "صعوبة في التناسق للمهارات الحركية", "مشكلات في الحكم والاستدلال", "اضطرابات في أصوات الكلام"], correct: 1 },
+        { text: "ماذا يقصد بـ'التمثيل المعرفي'؟", options: ["تسجيل حسي مباشر للمثيرات", "تحويل المثيرات والخبرات إلى معاني وأفكار قابلة للتخزين", "احتفاظ مؤقت بالمعلومات لمعالجتها", "استرجاع المعلومات المخزنة وقت الحاجة"], correct: 1 },
+        { text: "أي من الخيارات يمثل أحد مصادر نظريات تمثيل المعلومات؟", options: ["تحليل أحلام المفحوصين", "نتائج الدراسات التجريبية والدراسات الفسيولوجية العصبية", "المقابلات الشخصية غير المنظمة", "الاستبطان الذاتي"], correct: 1 },
+        { text: "كيف يمكن وصف 'الاضطراب المعرفي' في أبسط تعريفاته؟", options: ["فقدان كامل للوعي", "معالجة غير واعية للمدخلات الحسية بعيداً عن موضوعية الانتباه", "خلل عضوي في خلايا الذاكرة", "استجابة انفعالية مفرطة"], correct: 1 },
+        { text: "ما نسبة انتشار اضطراب الانتباه حسب سليمان عبد الواحد؟", options: ["5% من أطفال الروضة", "20% من أطفال اضطرابات التعلم", "50% من أطفال فرط النشاط", "30% من أطفال المدرسة"], correct: 1 },
+        { text: "أي من العوامل في مرحلة الحمل يندرج ضمن أسباب الاضطراب المعرفي؟", options: ["التفاف الحبل السري", "تعرض الأم للأشعة أو المخدرات", "ارتجاج المخ بعد الولادة", "سوء التغذية في الرضاعة"], correct: 1 },
+        { text: "في تصنيف عادل العدل، أي أقسام الذاكرة يتضمن الذاكرة العاملة؟", options: ["الحسية", "قصيرة المدى", "طويلة المدى", "الإجرائية"], correct: 1 },
+        { text: "أي من الاضطرابات تشير إلى 'الإدراك الاجتماعي' كمجال من مجالات الوظائف العقلية في DSM-5؟", options: ["المزاجية", "المعرفية العصبية", "القلق", "الشخصية"], correct: 1 },
+        { text: "كيف عرفت Ninds (2012) الاضطراب المعرفي؟", options: ["أخطاء في التفكير", "أفكار تؤدي لرؤية غير دقيقة", "مشكلات في التفكير كالنسيان وصعوبات التعلم", "أنماط معالجة خاطئة"], correct: 2 },
+        { text: "أي من الآتي يعتبر من 'الاضطرابات اللغوية'؟", options: ["صعوبة تمييز الأصوات", "اضطرابات في أصوات الكلام واللغة", "مشكلات في الحساب", "صعوبة في التناسق الحركي"], correct: 1 }
+    ];
+
+    // ===================== أسئلة الفصل الثالث (20 سؤال) =====================
+    const chap3 = [
+        { text: "أي من الآتي يعبر عن العلاقة بين الانتباه والإدراك؟", options: ["الإدراك يسبق الانتباه", "الانتباه يسبق الإدراك ويُعد له", "عمليتان متطابقتان", "لا توجد علاقة"], correct: 1 },
+        { text: "كيف لخص ميلفن ماركس مفهوم الانتباه في نقاطه الأربع؟", options: ["وضوح الوعي، استعداد حركي، تركيز، استبطان", "بؤرة الشعور، استعداد للتركيز، استعدادات حركية، انتقاء", "الوعي الكامل، اليقظة، التوزيع المرن، الثبات", "الإصغاء، التعقب، النموذج، التذبذب"], correct: 1 },
+        { text: "أي أنواع الانتباه حسب طبيعة المنبهات يرتبط بإشباع الحاجات الذاتية دون جهد كبير؟", options: ["الانتباه القصدي", "الانتباه القسري", "الانتباه التلقائي", "الانتباه المتناوب"], correct: 2 },
+        { text: "ما الذي يميز 'الانتباه القسري' عن 'الانتباه التلقائي'؟", options: ["الأول يحتاج جهداً والثاني لا", "الأول لمثير يشبع حاجة والثاني لمثير مفاجئ", "الأول يفرضه مثير قسري والثاني بدافعية ذاتية", "الأول بوعي والثاني بلا وعي"], correct: 2 },
+        { text: "أي مكون من مكونات الانتباه يعني 'محاولة تحديد موقع المنبه'؟", options: ["التصفية", "الاستعداد", "البحث", "التعقب"], correct: 2 },
+        { text: "كيف يختلف 'البحث المتوازي' عن 'البحث المتسلسل'؟", options: ["متوازي خطوة بخطوة ومتسلسل نظرة شاملة", "متوازي سريع للمتشابهات ومتسلسل بطيء للمختلفة", "متوازي يحتاج جهداً أكبر ومتسلسل جهداً أقل", "متوازي واعي ومتسلسل تلقائي"], correct: 1 },
+        { text: "أي مظاهر الانتباه يعني 'كمية المواد المدركة في وقت بوضوح'؟", options: ["حدة الانتباه", "ثبات الانتباه", "حجم الانتباه", "توزيع الانتباه"], correct: 2 },
+        { text: "ما المقصود بـ'ثبات الانتباه'؟", options: ["الاحتفاظ بالانتباه الحاد لأطول فترة", "سرعة تحويل الانتباه", "الجهد المبذول تجاه مثير", "توجيه الانتباه لعدة مثيرات"], correct: 0 },
+        { text: "أي خصائص الانتباه تعني 'المثير الرئيسي يتلاشى ثم يعود بعد زوال المثير الدخيل'؟", options: ["التعقب", "التذبذب", "النموذج", "المسح"], correct: 2 },
+        { text: "كيف تفسر 'النظريات أحادية المصدر' معالجة المعلومات؟", options: ["معالجة عدة مثيرات بوعي", "مرشح يسمح لمثير واحد ويمنع الآخرين", "سعة تتغير بمرونة", "قنوات منفصلة دون تداخل"], correct: 1 },
+        { text: "ما الافتراض المركزي لنظرية كاهنمان في التوزيع المرن؟", options: ["سعة ثابتة محدودة", "سعة تتغير بمرونة حسب المهمة", "مصادر متعددة لكل منها سعة", "اختيار الفعل هو الآلية الأساسية"], correct: 1 },
+        { text: "أي النظريات تنظر للانتباه على أنه 'مصادر متعددة لكل منها سعة معينة'؟", options: ["أحادية المصدر", "التوزيع المرن", "متعددة المصادر", "اختيار الفعل"], correct: 2 },
+        { text: "ماذا تقترح 'نظرية اختيار الفعل' كآلية أساسية للانتباه؟", options: ["مرشح مركزي", "الفرد يحدد انتباهه لتحقيق هدف باختيار الفعل المناسب", "سعة تتغير بمرونة", "قنوات منفصلة دون تداخل"], correct: 1 },
+        { text: "أي مظاهر الانتباه يعني 'النشاط الموجه لعدة أشياء في وقت واحد'؟", options: ["التركيز", "التحويل", "التوزيع", "الحجم"], correct: 2 },
+        { text: "ما الفرق بين 'الانتباه العميق' و'الانتباه السطحي'؟", options: ["العميق سريع والسطحي بطيء", "العميق بتفاعل والسطحي مرور الكرام", "العميق لا إرادي والسطحي إرادي", "العميق لمثير واحد والسطحي لأكثر"], correct: 1 },
+        { text: "أي أنواع الانتباه حسب الاستمرارية يعني 'التركيز مع فواصل زمنية'؟", options: ["المستمر", "المتقطع", "المتناوب", "الثابت"], correct: 1 },
+        { text: "ما الذي يميز 'الانتباه الداخلي' عن 'الانتباه الخارجي'؟", options: ["الأول بيئي والثاني شخصي", "الأول لأفكار داخلية والثاني لمثيرات حسية خارجية", "الأول سمعي والثاني بصري", "الأول تلقائي والثاني إرادي"], correct: 1 },
+        { text: "أي خصائص الانتباه تعني 'الانتباه المتصل لمنبه عبر الزمن'؟", options: ["الإصغاء", "التعقب", "النموذج", "التذبذب"], correct: 1 },
+        { text: "كيف يفسر 'مبدأ التذبذب' سلوك الفرد تجاه المثيرات المستمرة؟", options: ["المثير يختفي ثم يعود", "شدة المثير تتغير بين القوة والضعف", "الفرد يحول انتباهه لمثيرات أخرى", "الانتباه يظل ثابتاً"], correct: 1 },
+        { text: "أي الأمثلة يمثل 'عملية المسح' كخاصية من خصائص الانتباه؟", options: ["حصر الذهن على عنصر واحد", "استبعاد المثيرات غير المرغوب فيها", "تحريك العينين أثناء البحث في مكان مزدحم", "الاستعداد لسماع جرس الهاتف"], correct: 2 }
+    ];
+
+    // ===================== أسئلة الفصل الرابع (20 سؤال) =====================
+    const chap4 = [
+        { text: "من صاغ مصطلح 'التلف الدماغي البسيط'؟", options: ["ستراوس", "هوفمان", "كليمنتر", "ستيل"], correct: 2 },
+        { text: "أي منطقة دماغية أثبت برادو أنها المسؤولة عن ضعف التركيز؟", options: ["الفصوص الخلفية", "وسط المخ", "الفص الجبهي الأيمن", "جذع الدماغ"], correct: 2 },
+        { text: "أي النواقل العصبية يرتبط بعلاج اضطراب الانتباه وفرط النشاط؟", options: ["السيروتونين", "الدوبامين والنورإبينفرين", "الأستيل كولين", "الغلوتامات"], correct: 1 },
+        { text: "نسبة انتشار اضطراب الانتباه بين أبناء الأسر المصابة تقارب؟", options: ["25%", "50%", "75%", "90%"], correct: 1 },
+        { text: "أي العوامل في مرحلة الولادة قد يؤدي لاضطراب الانتباه؟", options: ["الولادة القيصرية", "التفاف الحبل السري وانقطاع الأكسجين", "انخفاض وزن الطفل", "البكاء الشديد"], correct: 1 },
+        { text: "أي شكل من صعوبات الانتباه يشمل 'ضعف الجهد العقلي في المهام الأكاديمية'؟", options: ["المعرفية", "الانفعالية", "الفسيولوجية", "المصحوبة"], correct: 0 },
+        { text: "أي نوع من ADHD يظهر فيه تلازم الأعراض الثلاثة معاً؟", options: ["عدم الانتباه", "فرط النشاط", "المشترك", "البسيط"], correct: 2 },
+        { text: "أي خاصية ثانوية تسمى 'أطفال أحلام اليقظة'؟", options: ["ضعف العلاقة", "أحلام اليقظة", "ضعف التآزر", "ضعف مفهوم الذات"], correct: 1 },
+        { text: "أي العبارات تصف 'ضعف التآزر الحركي' في ADHD؟", options: ["يؤثر على المهارات الكبيرة فقط", "ينعكس على الحركات الدقيقة كالكتابة", "لا يؤثر على المهارات إطلاقاً", "يؤدي لتفوق حركي"], correct: 1 },
+        { text: "أي الأعراض الأساسية لـADHD يعني 'مقاطعة الآخرين وعدم انتظار الدور'؟", options: ["عدم الانتباه", "الاندفاعية", "فرط النشاط", "ضعف الذاكرة"], correct: 1 },
+        { text: "ما الذي حدث في مراجعة DSM-III-R عام 1987؟", options: ["إضافة نوع رابع", "إلغاء التمييز واعتباره مكوناً واحداً", "دمج مع التوحد", "حذف فرط النشاط"], correct: 1 },
+        { text: "ما سبب ضعف مفهوم الذات في ADHD؟", options: ["الذكاء المرتفع", "التجارب الفاشلة والنقد المتكرر", "التدليل الزائد", "الاهتمام المفرط"], correct: 1 },
+        { text: "أي العوامل في مرحلة الحمل يزيد خطر اضطراب الانتباه؟", options: ["تناول الفيتامينات", "تعرض الأم للأشعة أو المخدرات", "الرياضة الخفيفة", "النظام الغذائي المتوازن"], correct: 1 },
+        { text: "أي العوامل بعد الولادة قد يؤدي لاضطراب الانتباه؟", options: ["الرضاعة الطبيعية", "ارتجاج المخ أو التهاب سحائي", "النوم لساعات طويلة", "التطعيمات"], correct: 1 },
+        { text: "نسبة الذكور للإناث في ADHD حسب ملاحظات ستيل؟", options: ["1:1", "2:1", "3:1", "4:1"], correct: 2 },
+        { text: "أي شكل من صعوبات الانتباه يرتبط بالإحباط والتململ؟", options: ["المعرفية", "الانفعالية", "الفسيولوجية", "المصحوبة"], correct: 1 },
+        { text: "أي نوع من ADHD كان يعرف سابقاً بـ ADD؟", options: ["المشترك", "عدم الانتباه", "فرط النشاط", "غير المحدد"], correct: 1 },
+        { text: "أي العوامل يزيد من انتباه الطفل ذي ADHD؟", options: ["التعليمات العامة", "التعليمات الفردية وجهاً لوجه", "الضوضاء العالية", "المشتتات"], correct: 1 },
+        { text: "أي الأعراض الأساسية لـADHD يعني 'ترك المقعد والتململ'؟", options: ["عدم الانتباه", "الاندفاعية", "فرط النشاط", "ضعف الذاكرة"], correct: 2 },
+        { text: "أي العوامل الداخلية تؤثر سلباً على انتباه الطفل رغم عدم وجود مشتتات خارجية؟", options: ["القلق والمشاعر", "الضوضاء", "الإضاءة الخافتة", "الازدحام"], correct: 0 }
+    ];
+
+    // ===================== أسئلة الفصل الخامس (20 سؤال) =====================
+    const chap5 = [
+        { text: "أي من العلماء عرّف الإدراك بأنه 'محاولة تفسير المعلومات التي تصل للدماغ'؟", options: ["سولسو", "أندرسون", "ليندزى ونورمان", "ستيرنبرغ"], correct: 1 },
+        { text: "أي مبادئ الجشطلت يعني 'إدراك المثيرات المتقاربة كمجموعة واحدة'؟", options: ["التشابه", "التقارب", "الاستمرار", "الإغلاق"], correct: 1 },
+        { text: "ما المقصود بـ'الأجنيوزيا البصرية'؟", options: ["فقدان البصر", "عدم التعرف على الأشياء رغم سلامة العين", "تشويه الألوان", "ضعف حدة الإبصار"], correct: 1 },
+        { text: "أي أنواع الأجنيوزيا يعاني فيه المريض من 'صعوبة بناء المخطط الأولي للشيء المرئي'؟", options: ["الشكل", "التحويلية", "الترابطية", "الحركية"], correct: 0 },
+        { text: "ما الذي أثبتته دراسة بالمر (1975)؟", options: ["السياق لا يؤثر على الإدراك", "الفرد يمكنه إدراك الأشكال المبهمة من خلال السياق", "الإدراك يعتمد على الخبرة فقط", "السياق يؤثر على الألوان فقط"], correct: 1 },
+        { text: "أي مراحل الإدراك الحسي تعني 'تنظيم وتصنيف المثيرات'؟", options: ["حدوث الاستثارة", "تنظيم المثيرات", "تفسير الاستثارة", "الاستجابة"], correct: 1 },
+        { text: "أي العوامل المؤثرة في الإدراك تعني 'تأثير الخبرة السابقة'؟", options: ["الحاجات الفسيولوجية", "درجة الألفة والخبرة", "الحالة المزاجية", "الدافعية"], correct: 1 },
+        { text: "ما المقصود بـ'الخداعات الحسية'؟", options: ["فقدان الحواس", "الفهم الخاطئ لمثير أو إدراك من دون مثير", "ضعف الإبصار", "اضطراب التمييز السمعي"], correct: 1 },
+        { text: "أي أنواع الهلاوس يعني 'مثير حسي يسبب هلوسة في مجال حسي آخر'؟", options: ["الوظيفية", "المنعكسة", "خارج مجال الحس", "شبح المرآة"], correct: 1 },
+        { text: "أي صعوبات الإدراك البصري تعني 'عدم استخلاص الشكل من الخلفية'؟", options: ["التمييز", "تمييز الشكل والأرضية", "الإغلاق", "العلاقات المكانية"], correct: 1 },
+        { text: "ما المقصود بـ'الإغلاق البصري'؟", options: ["تمييز أوجه التشابه", "التعرف على الصورة الكاملة رغم غياب أجزائها", "إدراك العلاقات المكانية", "تمييز الشكل من الخلفية"], correct: 1 },
+        { text: "أي صعوبات الإدراك البصري تتعلق بـ'وضع الأشياء في الفراغ'؟", options: ["التمييز", "الإغلاق", "العلاقات المكانية", "التعرف"], correct: 2 },
+        { text: "أي أنواع الحبسة يتميز بـ'كلام تلغرافي' مع سلامة الفهم؟", options: ["ويرنك", "بروكا", "التوصيلية", "الشاملة"], correct: 1 },
+        { text: "أي منطقة دماغية اكتشفها كارل ويرنك؟", options: ["منطقة بروكا", "منطقة ويرنك", "التلفيف الزاوي", "الفص الجبهي الأيمن"], correct: 1 },
+        { text: "ما الذي اكتشفه بول بروكا عام 1861؟", options: ["منطقة فهم اللغة", "منطقة إنتاج الكلام", "النظام الشبكي", "مراكز الذاكرة"], correct: 1 },
+        { text: "أي أنواع الحبسة يتميز بـ'كلام طلق غير مفهوم' مع ضعف الفهم؟", options: ["بروكا", "ويرنك", "التوصيلية", "الشاملة"], correct: 1 },
+        { text: "ما الذي تتميز به 'الحبسة التوصيلية'؟", options: ["ضعف التكرار مع فهم سليم", "فقدان الكلام مع سلامة الفهم", "كلام غير مفهوم مع ضعف الفهم", "أسلوب تلغرافي"], correct: 0 },
+        { text: "أي الأعراض الجانبية للحبسة يعني 'صعوبة التحكم في عضلات الكلام'؟", options: ["الأبروكسيا", "الديسارثرية", "الأجنيوزيا", "العمه"], correct: 1 },
+        { text: "أي صعوبات الإدراك السمعي تعني 'ضعف تخزين واسترجاع المسموع'؟", options: ["الوعي الصوتي", "التمييز السمعي", "الذاكرة السمعية", "المزج السمعي"], correct: 2 },
+        { text: "ما المقصود بـ'اختلال الآنية'؟", options: ["البيئة غير حقيقية", "الشعور بعدم حقيقة الذات", "تلون المدركات بلون معين", "تغير حجم المدركات"], correct: 1 }
+    ];
+
+    const chapters = { chap1, chap2, chap3, chap4, chap5 };
+    let states = { chap1: {}, chap2: {}, chap3: {}, chap4: {}, chap5: {} };
+
+    function buildChapter(containerId, questions, chapKey) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        container.innerHTML = '';
+        questions.forEach((q, idx) => {
+            const card = document.createElement('div');
+            card.className = 'question-card';
+            card.innerHTML = `
+                <div class="q-header"><span class="q-num">${idx+1}</span><span class="q-text">${q.text}</span></div>
+                <div class="options" id="opts-${chapKey}-${idx}"></div>
+                <button class="check-btn" id="check-${chapKey}-${idx}"><i class="fas fa-check"></i> تأكيد</button>
+                <div class="feedback" id="fb-${chapKey}-${idx}"></div>
+            `;
+            container.appendChild(card);
+            const optsDiv = document.getElementById(`opts-${chapKey}-${idx}`);
+            q.options.forEach((opt, optIdx) => {
+                const optDiv = document.createElement('div');
+                optDiv.className = 'opt';
+                const radio = document.createElement('input');
+                radio.type = 'radio';
+                radio.name = `${chapKey}_${idx}`;
+                radio.value = optIdx;
+                radio.id = `${chapKey}_${idx}_opt${optIdx}`;
+                if (states[chapKey][idx]) radio.disabled = true;
+                const label = document.createElement('label');
+                label.htmlFor = `${chapKey}_${idx}_opt${optIdx}`;
+                label.innerText = opt;
+                optDiv.appendChild(radio);
+                optDiv.appendChild(label);
+                optsDiv.appendChild(optDiv);
+            });
+            const checkBtn = document.getElementById(`check-${chapKey}-${idx}`);
+            const fbDiv = document.getElementById(`fb-${chapKey}-${idx}`);
+            if (states[chapKey][idx]) {
+                checkBtn.disabled = true;
+                fbDiv.innerHTML = states[chapKey][idx].text;
+                fbDiv.className = states[chapKey][idx].cls;
+            }
+            checkBtn.addEventListener('click', () => {
+                const selected = document.querySelector(`input[name="${chapKey}_${idx}"]:checked`);
+                if (!selected) { fbDiv.innerHTML = "⚠️ اختر إجابة"; fbDiv.style.background = "#451a0e"; return; }
+                const val = parseInt(selected.value);
+                const isCor = val === q.correct;
+                const letter = String.fromCharCode(65 + q.correct);
+                if (isCor) {
+                    fbDiv.innerHTML = `✓ صحيح. ${letter}. ${q.options[q.correct]}`;
+                    fbDiv.className = "feedback correct";
+                } else {
+                    fbDiv.innerHTML = `✗ خطأ. الصواب: ${letter}. ${q.options[q.correct]}`;
+                    fbDiv.className = "feedback wrong";
+                }
+                document.querySelectorAll(`input[name="${chapKey}_${idx}"]`).forEach(r => r.disabled = true);
+                checkBtn.disabled = true;
+                states[chapKey][idx] = { text: fbDiv.innerHTML, cls: fbDiv.className };
+                const progSpan = document.getElementById(`${chapKey}Progress`);
+                const total = questions.length;
+                const answered = Object.keys(states[chapKey]).length;
+                if (progSpan) progSpan.innerHTML = `📊 ${answered}/${total}`;
+            });
+        });
+        const progSpan = document.getElementById(`${chapKey}Progress`);
+        if (progSpan) progSpan.innerHTML = `📊 0/${questions.length}`;
+    }
+
+    buildChapter('chap1Flow', chap1, 'chap1');
+    buildChapter('chap2Flow', chap2, 'chap2');
+    buildChapter('chap3Flow', chap3, 'chap3');
+    buildChapter('chap4Flow', chap4, 'chap4');
+    buildChapter('chap5Flow', chap5, 'chap5');
+
+    document.querySelectorAll('.reset-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const chap = btn.getAttribute('data-chap');
+            states[chap] = {};
+            buildChapter(`${chap}Flow`, chapters[chap], chap);
+        });
+    });
+
+    const tabs = document.querySelectorAll('.tab-btn');
+    const contents = document.querySelectorAll('.tab-content');
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const target = tab.getAttribute('data-tab');
+            contents.forEach(c => c.classList.remove('active-tab'));
+            tabs.forEach(t => t.classList.remove('active'));
+            document.getElementById(target).classList.add('active-tab');
+            tab.classList.add('active');
+        });
+    });
+</script>
+</body>
+</html>
